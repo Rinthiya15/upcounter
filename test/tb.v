@@ -1,15 +1,8 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-module tb_upcounter();
+module tb ();
 
-  // Dump waveform
-  initial begin
-    $dumpfile("tb_upcounter.fst");
-    $dumpvars(0, tb);
-  end
-
-  // Signals
   reg clk;
   reg rst_n;
   reg ena;
@@ -20,57 +13,33 @@ module tb_upcounter();
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-`ifdef GL_TEST
-  wire VPWR = 1'b1;
-  wire VGND = 1'b0;
-`endif
-
-  // DUT instantiation
-  tt_um_upcounter user_project (
-
-`ifdef GL_TEST
-      .VPWR(VPWR),
-      .VGND(VGND),
-`endif
-
-      .ui_in(ui_in),
-      .uo_out(uo_out),
-      .uio_in(uio_in),
-      .uio_out(uio_out),
-      .uio_oe(uio_oe),
-      .ena(ena),
-      .clk(clk),
-      .rst_n(rst_n)
-  );
-
-  // Clock generation
-  always #5 clk = ~clk;
-
-  // Test sequence
   initial begin
-
-    // Initialize inputs
     clk = 0;
+    forever #5 clk = ~clk;
+  end
+
+  initial begin
     rst_n = 0;
     ena = 1;
-    ui_in = 8'b0;
-    uio_in = 8'b0;
+    ui_in = 0;
+    uio_in = 0;
 
-    // Hold reset for some time
     #20;
     rst_n = 1;
 
-    // Run simulation
     #200;
-
-    // Finish
     $finish;
   end
 
-  // Monitor values
-  initial begin
-    $monitor("Time=%0t | Reset=%b | Counter=%d",
-              $time, rst_n, uo_out);
-  end
+  tt_um_upcounter dut (
+    .ui_in(ui_in),
+    .uo_out(uo_out),
+    .uio_in(uio_in),
+    .uio_out(uio_out),
+    .uio_oe(uio_oe),
+    .ena(ena),
+    .clk(clk),
+    .rst_n(rst_n)
+  );
 
 endmodule
