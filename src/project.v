@@ -16,14 +16,14 @@ module tt_um_upcounter (
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             counter <= 8'd0;
-        else if (ena)
+        else
             counter <= counter + 1'b1;
     end
 
-    assign uo_out = counter;
-    assign uio_out = 0;
-    assign uio_oe  = 0;
+    assign uo_out  = counter;
+    assign uio_out = 8'd0;
+    assign uio_oe  = 8'd0;
 
-    wire _unused = &{ui_in, uio_in};
+    wire _unused = &{ui_in, uio_in, ena};
 
 endmodule
