@@ -12,10 +12,10 @@ async def test_upcounter(dut):
     dut.uio_in.value = 0
 
     dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 5)
+    await ClockCycles(dut.clk, 3)
 
     dut.rst_n.value = 1
 
     for i in range(10):
         await ClockCycles(dut.clk, 1)
-        assert int(dut.uo_out.value) == i, f"Fail at {i}"
+        assert int(dut.uo_out.value) == i, f"Expected {i}, got {dut.uo_out.value}"
