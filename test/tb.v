@@ -1,11 +1,11 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-module tb();
+module tb_upcounter();
 
   // Dump waveform
   initial begin
-    $dumpfile("tb.fst");
+    $dumpfile("tb_upcounter.fst");
     $dumpvars(0, tb);
   end
 
