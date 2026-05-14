@@ -1,7 +1,7 @@
 `default_nettype none
 `timescale 1ns / 1ps
 
-module upcounter_tb ();
+module tb();
 
   // Dump waveform
   initial begin
