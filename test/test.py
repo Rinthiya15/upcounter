@@ -16,9 +16,6 @@ async def test_upcounter(dut):
 
     dut.rst_n.value = 1
 
-    await ClockCycles(dut.clk, 1)  # important delay
-
     for i in range(10):
         await ClockCycles(dut.clk, 1)
-        val = int(dut.uo_out.value)
-        assert val == i + 1, f"Expected {i+1}, got {val}"
+        assert int(dut.uo_out.value) == i, f"Fail at {i}"
