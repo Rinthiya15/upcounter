@@ -20,10 +20,10 @@ module tt_um_upcounter (
             counter <= counter + 1'b1;
     end
 
-    assign uo_out  = counter;
-    assign uio_out = 8'd0;
-    assign uio_oe  = 8'd0;
+    assign uo_out = counter;
+    assign uio_out = 0;
+    assign uio_oe  = 0;
 
-    wire _unused = &{ui_in, uio_in, 1'b0};
+    wire _unused = &{ui_in, uio_in};
 
 endmodule
