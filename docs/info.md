@@ -8,13 +8,8 @@ You can also include images in this folder and reference them in the markdown. E
 -->
 
 ## How it works
-
-Explain how your project works
-
+An 8-bit up counter increments its value by 1 on every clock pulse and resets to 0 when rst_n is low.
 ## How to test
-
-Explain how to use your project
-
+Apply clock pulses, keep ena high, release reset (rst_n = 1), and observe the count on uo_out[7:0].
 ## External hardware
-
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+No external hardware required.
