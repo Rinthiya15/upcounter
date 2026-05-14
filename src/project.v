@@ -15,13 +15,13 @@ module tt_um_upcounter (
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n)
-            counter <= 0;
-        else
-            counter <= counter + 1;
+            counter <= 8'd0;
+        else if (ena)
+            counter <= counter + 1'b1;
     end
 
-    assign uo_out = counter;
-    assign uio_out = 0;
-    assign uio_oe = 0;
+    assign uo_out  = counter;
+    assign uio_out = 8'd0;
+    assign uio_oe  = 8'd0;
 
 endmodule
