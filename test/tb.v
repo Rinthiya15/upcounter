@@ -1,5 +1,5 @@
 `default_nettype none
-`timescale 1ns / 1ps
+`timescale 1ns/1ps
 
 module tb ();
 
@@ -13,24 +13,7 @@ module tb ();
   wire [7:0] uio_out;
   wire [7:0] uio_oe;
 
-  initial begin
-    clk = 0;
-    forever #5 clk = ~clk;
-  end
-
-  initial begin
-    rst_n = 0;
-    ena = 1;
-    ui_in = 0;
-    uio_in = 0;
-
-    #20;
-    rst_n = 1;
-
-    #200;
-    $finish;
-  end
-
+  // DUT
   tt_um_upcounter dut (
     .ui_in(ui_in),
     .uo_out(uo_out),
@@ -41,5 +24,22 @@ module tb ();
     .clk(clk),
     .rst_n(rst_n)
   );
+
+  // clock
+  initial clk = 0;
+  always #5 clk = ~clk;
+
+  initial begin
+    ena = 1;
+    ui_in = 0;
+    uio_in = 0;
+
+    rst_n = 0;
+    #20;
+    rst_n = 1;
+
+    #200;
+    $finish;
+  end
 
 endmodule
